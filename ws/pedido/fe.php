@@ -42,6 +42,10 @@ try {
         "date" => $date
       );
 
+      $dataResolution = array(
+        "id" => 16
+      );
+
       $itemsInvoice = $apiAlegra->makeItemsInvoice($id);
       $paymentsInvoice = $apiAlegra->makePaymentsInvoice($dataPayment);
       $clientInvoice = $apiAlegra->makeClientInvoice($clienteFE);
@@ -54,7 +58,8 @@ try {
         "warehouse" => $warehouseInvoice,
         "payments" => $paymentsInvoice,
         "paymentForm" => "CASH",
-        "paymentMethod" => $tipoPago
+        "paymentMethod" => $tipoPago,
+        "numberTemplate" => $dataResolution
       );
 	 
 
