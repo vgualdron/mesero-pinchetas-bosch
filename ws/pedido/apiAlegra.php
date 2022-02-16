@@ -5,20 +5,11 @@ require_once("../conexion.php");
 
 class ApiAlegra extends PDO {
 	public $urlApi;
-	public $categories;
 	public $preReference;
 	public $conexion;
 	
 	public function __construct() {
-		$this->categories  =  array(
-			"BEBIDAS" => 1,
-			"PINCHETAS" => 2,
-			"ADICIONALES" => 3,
-			"CORTES DE CARNE" => 4,
-			"ENTRADAS" => 5,
-			"PINCHELADAS" => 6
-		);
-		$this->preReference = 'PINCHETAS_SAYAGO_';
+		$this->preReference = 'PINCHETAS_QUINTA_BOSCH_';
 		$this->urlApi = 'https://api.alegra.com/api/v1';
 		$this->conexion = new Conexion();
 	}
@@ -29,10 +20,6 @@ class ApiAlegra extends PDO {
 		$make_call = $this->callApi('GET', $url);
 		$response = json_decode($make_call, true);
 		return $response;
-	}
-	
-	public function getCategories() {
-		return $this->categories;
 	}
 	
 	public function getIdCategory($name) {
@@ -120,12 +107,12 @@ class ApiAlegra extends PDO {
 		$depeQuantity = $data["depeQuantity"];
 		$name = $data["name"];
 		$nameTipoProducto = $data["nameTipoProducto"];
-		$reference = $this->getPreReference().$idPinchetas."A";
+		$reference = $this->getPreReference().$idPinchetas."B";
 		$price = $data["price"];
 		$unitCost = $data["cost"];
 		$unit = "unit";
 		$type = "simple";
-		$idWarehouse = 2;
+		$idWarehouse = $this->makeWarehouseInvoice();
 		$initialQuantity = $data["quantity"] ? $data["quantity"] : 100;
 		$minQuantity = 10;
 		$maxQuantity = 1000;
@@ -188,6 +175,7 @@ class ApiAlegra extends PDO {
 			$itemNew = $this->makeItem($valor);
 			$itemNew["idPinchetas"] = $valor["id"];
 			$response = $this->getItem($itemNew);
+			print_r($response);
 			if(empty($response)) {
 				$response["idPinchetas"] = $valor["id"];
 				$response["name"] = $valor["name"];
@@ -271,8 +259,8 @@ class ApiAlegra extends PDO {
 
 	}
 
-	public function makeWarehouseInvoice($idPedido) {
-		return 2;  // warehouse de sayago
+	public function makeWarehouseInvoice() {
+		return 1;  // warehouse de quinta bosch
 	}
 
 	public function makeStampInvoice($data) {
@@ -286,6 +274,7 @@ class ApiAlegra extends PDO {
 			"warehouse" => $data["warehouse"],
 			"paymentForm" => $data["paymentForm"],
         	"paymentMethod" => $data["paymentMethod"] == 'EFECTIVO' ? 'CASH' : 'CREDIT_CARD',
+			"numberTemplate" => $data["numberTemplate"],
 			"stamp" => array(
 				"generateStamp" => true
 			)
@@ -299,6 +288,7 @@ class ApiAlegra extends PDO {
 		// unset($data['id']);
 		$make_call = $this->callApi('POST', $url, json_encode($data));
 		$response = json_decode($make_call, true);
+		print_r($response);
 		return $response;
 	}
 }
