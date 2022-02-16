@@ -48,9 +48,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $flagKiosko = true;
         }
     }
-    if ($flagBebidas) {
+    /* if ($flagBebidas) {
         printCommand($mesa, $productos, "BEBIDAS-PRINTER");
-    }
+    } */
     if ($flagKiosko) {
         printCommand($mesa, $productos, "KIOSCO-PRINTER");
     }
