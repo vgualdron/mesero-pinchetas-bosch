@@ -41,12 +41,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 	$pos = strpos($mystring, $findme);
     $tienePropina = false;
 
-    if (strpos($mystring, 'DOMICILIO') === false && strpos($mystring, 'DE LLEVAR') === false) {
+    /* if (strpos($mystring, 'DOMICILIO') === false && strpos($mystring, 'DE LLEVAR') === false) {
         $tienePropina = true;
-    }
+    } */
 	
 	if ($pos === false) {
-        printInvoice($frm, 'POS-80', $tienePropina);
+        printInvoice($frm, 'CAJA-PRINTER', $tienePropina);
 	} else {
 		printInvoice($frm, 'KIOSCO-PRINTER', $tienePropina);
 	}

@@ -43,7 +43,7 @@ try {
       );
 
       $dataResolution = array(
-        "id" => 16
+        "id" => 19
       );
 
       $itemsInvoice = $apiAlegra->makeItemsInvoice($id);
@@ -65,6 +65,8 @@ try {
 
       $invoice = $apiAlegra->makeStampInvoice($dataInvoice);
       $result = $apiAlegra->stampInvoice($invoice);
+	  
+	  // print_r($result);
       
       $cliente = $result["client"];
 

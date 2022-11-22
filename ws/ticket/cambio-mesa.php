@@ -49,7 +49,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     echo $mesaNueva;
     echo $mesaVieja;
 
-    printCommand($mesaNueva, $mesaVieja, $nombreMesero, "POS-80");
+    printCommand($mesaNueva, $mesaVieja, $nombreMesero, "CAJA-PRINTER");
 }
 
 function printCommand($mesaNueva, $mesaVieja, $mesero, $printerName) {

@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         desde el panel de control
     */
 
-    $nombre_impresora = "POS-80"; 
+    $nombre_impresora = "CAJA-PRINTER"; 
 
 
     $connector = new WindowsPrintConnector($nombre_impresora);

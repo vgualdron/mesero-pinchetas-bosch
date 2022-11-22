@@ -23,16 +23,13 @@ function printCommand($frm, $type) {
     if ($idTipoProducto == 3) {
         $flagBebidas = true;
     }
-    if ($idTipoProducto == 6) {
+    if ($idTipoProducto == 7) {
         $flagKiosko = true;
     }
-    if ($flagBebidas) {
-        printTicket($mesa, $producto, $pedido, $type, "BEBIDAS-PRINTER");
-    }
-    if ($flagKiosko) {
+    if ($flagKiosko || $flagBebidas) {
         printTicket($mesa, $producto, $pedido, $type, "KIOSCO-PRINTER");
     }
-    printTicket($mesa, $producto, $pedido, $type, "POS-80");
+    printTicket($mesa, $producto, $pedido, $type, "CAJA-PRINTER");
 }
 
 function printTicket($mesa, $producto, $pedido, $type, $printerName) {

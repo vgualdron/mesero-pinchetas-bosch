@@ -175,7 +175,7 @@ class ApiAlegra extends PDO {
 			$itemNew = $this->makeItem($valor);
 			$itemNew["idPinchetas"] = $valor["id"];
 			$response = $this->getItem($itemNew);
-			print_r($response);
+
 			if(empty($response)) {
 				$response["idPinchetas"] = $valor["id"];
 				$response["name"] = $valor["name"];
@@ -288,7 +288,7 @@ class ApiAlegra extends PDO {
 		// unset($data['id']);
 		$make_call = $this->callApi('POST', $url, json_encode($data));
 		$response = json_decode($make_call, true);
-		print_r($response);
+		
 		return $response;
 	}
 }

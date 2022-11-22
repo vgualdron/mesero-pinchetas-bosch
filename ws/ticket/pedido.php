@@ -44,17 +44,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($idTipoProducto == 3) {
             $flagBebidas = true;
         }
-        if ($idTipoProducto == 6) {
+        if ($idTipoProducto == 7) {
             $flagKiosko = true;
         }
     }
-    /* if ($flagBebidas) {
-        printCommand($mesa, $productos, "BEBIDAS-PRINTER");
-    } */
-    if ($flagKiosko) {
+    if ($flagKiosko || $flagBebidas) {
         printCommand($mesa, $productos, "KIOSCO-PRINTER");
     }
-    printCommand($mesa, $productos, "POS-80");
+    printCommand($mesa, $productos, "CAJA-PRINTER");
 }
 
 function printCommand($mesa, $productos, $printerName) {

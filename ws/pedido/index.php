@@ -15,6 +15,7 @@ try {
   //  listar todos los posts o solo uno
   if ($_SERVER['REQUEST_METHOD'] == 'GET') {
       $registradopor = openCypher('decrypt', $_GET['token']);
+	  // echo  $registradopor;
       if (isset($_GET['id'])) {
          $sql = $conexion->prepare(" select 
             pedi.pedi_id as id,
@@ -35,7 +36,7 @@ try {
               inner join pinchetas_general.usuariorol usro on (rol.rol_id = usro.rol_id)
               inner join pinchetas_general.usuario usua on (usro.usua_id = usua.usua_id)
               inner join pinchetas_general.personageneral pege on (usua.pege_id = pege.pege_id)
-              where pege.pege_id = ?) as descripcionRolSesion,
+              where pege.pege_id = ? LIMIT 1) as descripcionRolSesion,
             (SELECT IF(COUNT(paan.paan_id) > 0, 'true', 'false') as isFE 
               FROM pinchetas_general.parametroano paan
               WHERE paan.paan_valor = pedi.pedi_prefijofactura
