@@ -291,5 +291,22 @@ class ApiAlegra extends PDO {
 		
 		return $response;
 	}
+	
+	
+	public function getResolution($prefix) {
+		$url = $this->getUrlApi().'/number-templates';
+		$make_call = $this->callApi('GET', $url);
+		$response = json_decode($make_call, true);
+
+		if ($response) {
+			foreach ( $response as $element ) {
+				if ( $prefix == $element['prefix'] && $element['status'] == 'active') {
+					return $element;
+				}
+			}
+		}
+
+		return null;
+	}
 }
 ?>

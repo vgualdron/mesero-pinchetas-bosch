@@ -42,10 +42,8 @@ try {
         "date" => $date
       );
 
-      $dataResolution = array(
-        "id" => 19
-      );
-
+      $dataResolution = $apiAlegra->getResolution('FEC');
+	  
       $itemsInvoice = $apiAlegra->makeItemsInvoice($id);
       $paymentsInvoice = $apiAlegra->makePaymentsInvoice($dataPayment);
       $clientInvoice = $apiAlegra->makeClientInvoice($clienteFE);
